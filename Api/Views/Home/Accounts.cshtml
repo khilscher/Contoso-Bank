@@ -1,0 +1,23 @@
+﻿@using Api.Models
+@{
+    ViewBag.Title = "Accounts";
+}
+<h2>@ViewBag.Title</h2>
+
+<table border="1" cellpadding="5" cellspacing="5" >
+
+    <tr>
+        <th>Account Number</th>
+        <th>Account Type</th>
+        <th>Account Balance</th>
+    </tr>
+
+    @foreach (Account item in ViewBag.Accounts)
+    {
+        <tr>
+            <td>@item.AccountNumber</td>
+            <td>@item.AccountType</td>
+            <td>@item.AccountBalance</td>
+        </tr>
+    }
+</table>
