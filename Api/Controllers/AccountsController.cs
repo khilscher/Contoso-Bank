@@ -33,14 +33,6 @@ namespace Api.Controllers
             }
         }
 
-        /*
-        // GET api/accounts
-        public List<Account> Get()
-        {
-            return accountList;
-        }
-        */
-
         // GET api/accounts
         [ResponseType(typeof(List<Account>))]
         [HttpGet]

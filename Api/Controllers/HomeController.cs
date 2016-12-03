@@ -23,56 +23,32 @@ namespace Api.Controllers
             return View();
         }
 
-        
-        public ActionResult Accounts()
-        {
-            //AccountsController accounts = new AccountsController();
-            //List<Account> accountList = accounts.Get();
-            //ViewBag.Title = "Accounts Page";
-            //ViewBag.Accounts = accountList;
 
+        public async Task<ActionResult> Accounts()
+        {
+            string apiUrl = "http://contosobankapi.azurewebsites.net/api/accounts";
+            List<Account> accountList;
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(apiUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+                if (response.IsSuccessStatusCode)
+                {
+                    var data = await response.Content.ReadAsStringAsync();
+                    accountList = JsonConvert.DeserializeObject<List<Account>>(data);
+                    ViewBag.Title = "Accounts Page";
+                    ViewBag.Accounts = accountList;
+                }
+
+
+            }
             return View();
+
         }
-        
-
-            /*
-        public ActionResult Accounts()
-        {
-
-
-
-            List<Account> accountList = GetAccounts();
-             GetAccounts().Wait();
-
-            ViewBag.Title = "Accounts Page";
-            ViewBag.Accounts = accountList;
-
-            return View();
-        }
-        
-
-        private async Task<List<Account>> GetAccounts()
-        {
-            //HttpClient httpClient = new HttpClient();
-            //HttpRequestMessage request;
-
-           // request = new HttpRequestMessage(HttpMethod.Get, "https://localhost:44380/api/accounts");
-
-            // Send the request to the server
-            HttpResponseMessage response = await httpClient.GetAsync("https://localhost:44380/api/accounts");
-
-            response.EnsureSuccessStatusCode();
-
-            string json = response.Content.ReadAsStringAsync().Result;
-
-            List<Account> accountList = JsonConvert.DeserializeObject<List<Account>>(json);
-            //List<Account> accountList = JsonConvert.DeserializeObject<IEnumerable<Account>>(json);
-
-
-            return accountList;
-        }
-
-    */
 
     }
 }
