@@ -1,4 +1,4 @@
-﻿@using Api.Models
+﻿@model IList<Api.Models.Account>
 @{
     ViewBag.Title = "Accounts";
 }
@@ -12,7 +12,7 @@
         <th>Account Balance</th>
     </tr>
 
-    @foreach (Account item in ViewBag.Accounts)
+    @foreach (var item in Model)
     {
         <tr>
             <td>@item.AccountNumber</td>

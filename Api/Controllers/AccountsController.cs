@@ -34,6 +34,9 @@ namespace Api.Controllers
         }
 
         // GET api/accounts
+        /// <summary>
+        /// Gets a list of accounts.
+        /// </summary>
         [ResponseType(typeof(List<Account>))]
         [HttpGet]
         [SwaggerResponse(HttpStatusCode.OK,
@@ -45,6 +48,10 @@ namespace Api.Controllers
         }
 
         // GET api/accounts/1001
+        // GET api/accounts
+        /// <summary>
+        /// Gets a specific account by account number.
+        /// </summary>
         [ResponseType(typeof(Account))]
         [HttpGet]
         [SwaggerResponse(HttpStatusCode.OK,
@@ -70,6 +77,10 @@ namespace Api.Controllers
         }
 
         // POST api/accounts
+        // GET api/accounts
+        /// <summary>
+        /// Creates a new account.
+        /// </summary>
         [ResponseType(typeof(Account))]
         [HttpPost]
         [SwaggerResponse(HttpStatusCode.OK,
@@ -95,6 +106,10 @@ namespace Api.Controllers
         }
 
         // PUT api/accounts/1001
+        // GET api/accounts
+        /// <summary>
+        /// Updates an existing account.
+        /// </summary>
         [ResponseType(typeof(void))]
         [HttpPut]
         [SwaggerResponse(HttpStatusCode.OK,
@@ -125,6 +140,10 @@ namespace Api.Controllers
 
 
         // DELETE api/accounts/1001
+        // GET api/accounts
+        /// <summary>
+        /// Deletes an account.
+        /// </summary>
         [HttpDelete]
         [SwaggerResponse(HttpStatusCode.OK,
             Description = "OK",

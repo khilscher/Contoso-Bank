@@ -27,7 +27,7 @@ namespace Api.Controllers
         public async Task<ActionResult> Accounts()
         {
             string apiUrl = "http://contosobankapi.azurewebsites.net/api/accounts";
-            List<Account> accountList;
+            List<Account> accountList = new List<Account>();
 
             using (HttpClient client = new HttpClient())
             {
@@ -46,7 +46,7 @@ namespace Api.Controllers
 
 
             }
-            return View();
+            return View(accountList);
 
         }
 
