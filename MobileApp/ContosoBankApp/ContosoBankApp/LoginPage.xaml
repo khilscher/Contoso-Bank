@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ContosoBankApp.LoginPage">
+  <StackLayout>
+    <Button Clicked="LoginButton_Clicked" Text="Login" />
+  </StackLayout>
+</ContentPage>

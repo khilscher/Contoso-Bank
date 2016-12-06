@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ContosoBankApp.AuthenticationSuccessfulPage">
+
+  <ContentPage.Content>
+    <ScrollView Orientation="Vertical">
+      <StackLayout VerticalOptions="Center" HorizontalOptions="Center" >
+        <Label Text="Authentication was successful!" />
+        <Label Text="{Binding UserId}" />
+        <Label Text="{Binding UserName}" />
+        <Label Text="{Binding User}" />
+        <Label Text="{Binding DisplayId}" />
+        <Label Text="{Binding UClientId}" />
+        <Editor Text="{Binding IdToken}" />
+        <Editor Text="{Binding AccessToken}" />
+        <Label Text="{Binding TenantId}" />
+        <Label Text="{Binding TokenType}" />
+        <Label Text="{Binding ExpiresOn}" />
+      </StackLayout>
+    </ScrollView>
+  </ContentPage.Content>
+  
+</ContentPage>
