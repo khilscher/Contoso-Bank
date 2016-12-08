@@ -19,6 +19,7 @@ namespace ContosoBankApp
         {
             try
             {
+                btnLogin.IsEnabled = false;
                 var authenticationResult = await App.AuthenticationClient.AcquireTokenAsync(App.Scopes,
                     "",
                     UiOptions.SelectAccount,
@@ -26,11 +27,16 @@ namespace ContosoBankApp
                     null,
                     App.Authority,
                     App.SignUpSignInPolicy);
-                await Navigation.PushAsync(new AuthenticationSuccessfulPage(authenticationResult));
+
+                App.Current.MainPage = new NavigationPage(new MainPage(authenticationResult));
+                //await Navigation.PushAsync(new MainPage);
+
+                //await Navigation.PushAsync(new AuthenticationSuccessfulPage(authenticationResult));
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Error Authenticating", ex.Message, "OK");
+                btnLogin.IsEnabled = true;
             }
         }
     }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ContosoBankApp.LoginPage">
   <StackLayout>
-    <Button Clicked="LoginButton_Clicked" Text="Login" />
+    <Label Text="Contoso Bank" VerticalOptions="Start" HorizontalOptions="Center" FontSize="28"/>
+    <Button x:Name="btnLogin" Clicked="LoginButton_Clicked" Text="Sign-in / Sign-up" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" BorderWidth="1" BorderColor="Black"/>
   </StackLayout>
 </ContentPage>

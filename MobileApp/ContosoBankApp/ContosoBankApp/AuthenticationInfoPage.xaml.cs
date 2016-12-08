@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace ContosoBankApp
 {
-    public partial class AuthenticationSuccessfulPage : ContentPage
+    public partial class AuthenticationInfoPage : ContentPage
     {
 
         public string UserId { get; set; }
@@ -22,7 +22,7 @@ namespace ContosoBankApp
         public string AccessToken { get; set; }
         public string UClientId { get; set; }
 
-        public AuthenticationSuccessfulPage(AuthenticationResult authenticationResult)
+        public AuthenticationInfoPage(AuthenticationResult authenticationResult)
         {
             InitializeComponent();
 
@@ -41,17 +41,6 @@ namespace ContosoBankApp
             TenantId = $"Tenant ID: {authenticationResult.TenantId}";
 
             BindingContext = this;
-        }
-
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-
-            await App.AuthenticationClient.AcquireTokenSilentAsync(App.Scopes,
-             string.Empty,
-             App.Authority,
-             App.SignUpSignInPolicy,
-             false);
         }
     }
 }
