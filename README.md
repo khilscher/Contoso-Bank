@@ -13,7 +13,22 @@ Once signed-up, the consumer can sign-in to the mobile application using the ide
 
 Upon signing in to the mobile application, a bearer token is assigned behind-the-scenes to the consumer which allows the consumer to securely lookup their bank accounts and balances. This is information is retrieved from a RESTful API secured by Azure Active Directory B2C (or other identity providers). The Contoso Bank REST API receives the bearer token from the mobile application as part of the HTTPS request and uses that to ensure the consumer is authorized to view the data. Normally this information is stored in a database such as Azure SQL Database and secured using Row Level Security. But to keep things simple, the Contoso Bank API  stores this data in memory and does not require a database.
 
+##Solution Components
+###Mobile Application
+- The mobile application was written in C# using Xamarin.Forms for a single code base supporting iOS, Android, and Windows UWP.
+- A Windows 10 computer with Visual Studio 2015, Update 3 and Xamarin Tools installed.
+- A Mac with XCode and Xamarin Studio
+- Microsoft Authentication Library (MSAL) library
+- Microsoft Azure Active Directory B2C (same tenant use by the API)
+
+###REST API
+- The API was written in C# using ASP.NET WebAPI and ASP.NET MVC for the website hosting the API documentation.
+- Azure App Service - API App
+- Swagger (Swashbuckle Nuget Package)
+- Microsoft Azure Active Directory B2C (same tenant use by the mobile application)
+
 ##//TODO
-Add multi-tenancy to object model so user 1 does not see user 2's bank accounts.
-Add pages for CRUD operations to mobile application
-Add MVVM and data bindings to mobile application
+- Add token refresh code to mobile application.
+- Add multi-tenancy to object model so user 1 does not see user 2's bank accounts.
+- Add pages for CRUD operations to mobile application.
+- Add MVVM and data bindings to mobile application.
