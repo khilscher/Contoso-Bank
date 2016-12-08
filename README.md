@@ -16,8 +16,8 @@ Upon signing in to the mobile application, a bearer token is assigned behind-the
 ##Solution Components
 ###Mobile Application
 - The mobile application was written in C# using Xamarin.Forms for a single code base supporting iOS, Android, and Windows UWP.
-- A Windows 10 computer with Visual Studio 2015, Update 3 and Xamarin Tools installed.
-- A Mac with XCode and Xamarin Studio
+- A Windows 10 computer with Visual Studio 2015, Update 3 and Xamarin installed.
+- A Mac OS X with XCode 8.1 and Xamarin Studio 6.1.2
 - Microsoft Authentication Library (MSAL) library
 - Microsoft Azure Active Directory B2C (same tenant use by the API)
 
