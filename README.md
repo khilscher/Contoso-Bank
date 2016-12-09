@@ -27,8 +27,36 @@ Upon signing in to the mobile application, a bearer token is assigned behind-the
 - Swagger (Swashbuckle Nuget Package)
 - Microsoft Azure Active Directory B2C (same tenant use by the mobile application)
 
+##Release Notes
+- By default AAD B2C returns a bearer token with a 60 minute expiry. This can be increased in AAD B2C. In addition, you can call AcquireTokenSilentAsync when the user navigates to a page or pulls down to refresh a page to refresh the token. MSAL generally handles refresh token for you. The following code block illustrates this.
+
+```
+ protected override async void OnAppearing()
+  {
+      base.OnAppearing();
+
+      try
+      {
+          AuthenticationResult ar = await App.AuthenticationClient.AcquireTokenSilentAsync(App.Scopes,
+           string.Empty,
+           App.Authority,
+           App.SignUpSignInPolicy,
+           false);
+
+          App.Token = ar.Token;
+          App.TokenExpiresOn = ar.ExpiresOn.ToString();
+
+      }
+      catch (Exception ee)
+      {
+          DisplayAlert("An error has occurred", "Exception message: " + ee.Message, "Dismiss");
+          App.AuthenticationClient.UserTokenCache.Clear(App.AuthenticationClient.ClientId);
+          Navigation.PushAsync(new LoginPage());
+      }
+  }
+```
+
 ##//TODO
-- Add token refresh code to mobile application.
 - Add multi-tenancy to object model so user 1 does not see user 2's bank accounts.
 - Add pages for CRUD operations to mobile application.
 - Add MVVM and data bindings to mobile application.
