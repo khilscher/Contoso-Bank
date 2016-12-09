@@ -28,7 +28,7 @@ Upon signing in to the mobile application, a bearer token is assigned behind-the
 - Microsoft Azure Active Directory B2C (same tenant use by the mobile application)
 
 ##Release Notes
-- By default AAD B2C returns a bearer token with a 60 minute expiry. This can be increased in AAD B2C. In addition, you can call AcquireTokenSilentAsync when the user navigates to a page or pulls down to refresh a page to refresh the token. MSAL generally handles refresh token for you. The following code block illustrates this.
+- By default AAD B2C returns an [ID token] (https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-reference-tokens) with a 60 minute expiry. This can be increased in AAD B2C. In addition, you can call AcquireTokenSilentAsync when the user navigates to a page or pulls down to refresh a page to refresh the token. MSAL opaquely handles refresh tokens for you. The following code block illustrates this.
 
 ```
  protected override async void OnAppearing()
