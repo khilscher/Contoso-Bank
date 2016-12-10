@@ -30,14 +30,17 @@ Upon signing in to the mobile application, a bearer token is assigned behind-the
 - The API was written in C# using ASP.NET 4.5.2 WebAPI and ASP.NET MVC for the website hosting the API documentation.
 - Azure App Service - API App
 - [Swagger] (https://www.nuget.org/packages/Swashbuckle/) (Nuget Package: ```Swashbuckle```)
-- Microsoft Azure Active Directory B2C (same tenant use by the mobile application)
+- The API is protected by enabling Easy Auth on the Azure App Service hosting the API and configuring it to use Microsoft Azure Active Directory B2C (same tenant use by the mobile application)
+- Once you've published the API to Azure App Service, you can manually interact with the API using Swagger by browsing to https://someurl.azurewebsites.net/swagger. If you've already enabled Easy Auth, you will need to sign-up (create an account in AAD B2C) and then sign-in to use the API. 
 
 ###AAD B2C
 Follow Chris Gillum's excellent blog post on configuring Azure App Service with Easy Auth and AAD B2C. See reference 1 below. 
 
 Easy Auth is an Azure App Service feature which basically places an authentication layer in front of an App Service, such as a Web App or API, with no changes to your application code. For the Contoso Bank API you will see there is no authentication code in the API source code. This is entirely handled by Easy Auth. In reality, you'll likely put some authorization logic into your API code to ensure user's can't see each others data. 
 
-Easy Auth enabled on the Contoso Bank API is configured to authenticate against AAD B2C, and the same AAD tenant used by the mobile application. 
+The example code assumes you've setup AAD B2C for "Local" accounts. Meaning, a user can sign-up using a username/pwd or email/pwd (which are stored in AAD B2C) and social network logins are disable. But there is nothing preventing you from enabling and using social network logins.
+
+Easy Auth enabled on the Contoso Bank API is configured to authenticate against AAD B2C (configured for "Local" accounts), the same AAD tenant used by the mobile application. 
 
 A few important points:
 - Ensure you append ```“/.auth/login/aad/callback``` to the Reply URL when registering your application with AAD B2C.
