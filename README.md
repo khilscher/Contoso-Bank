@@ -77,6 +77,7 @@ A few important points:
 1. [App Service Easy Auth and Azure AD B2C] (https://cgillum.tech/2016/05/27/app-service-auth-and-azure-ad-b2c/)
 2. [AAD B2C Documentation] (https://docs.microsoft.com/en-us/azure/active-directory-b2c/)
 3. [Integrate Azure AD B2C into a Xamarin forms app using MSAL] (https://github.com/Azure-Samples/active-directory-b2c-xamarin-native)
+4. [Integrate Microsoft identity and the Microsoft Graph into a Xamarin forms app using MSAL] (https://github.com/Azure-Samples/active-directory-xamarin-native-v2)
 
 ##//TODO
 - Add multi-tenancy to object model so user 1 does not see user 2's bank accounts.
