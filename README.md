@@ -84,4 +84,3 @@ A few important points:
 ##//TODO
 - Add multi-tenancy to object model so user 1 does not see user 2's bank accounts.
 - Add pages for CRUD operations to mobile application (deposit/withdraw funds, create account, delete account).
-- Add MVVM and data bindings to mobile application.
