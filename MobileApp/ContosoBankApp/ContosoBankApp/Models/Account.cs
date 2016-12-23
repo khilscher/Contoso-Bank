@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace ContosoBankApp.Models
 {
-    public class Account
+    public class Account 
     {
         //Properties
         [Required]
@@ -16,5 +17,6 @@ namespace ContosoBankApp.Models
         public string AccountType { get; set; }
         [Required]
         public double AccountBalance { get; set; }
+
     }
 }

@@ -1,0 +1,39 @@
+﻿using Xamarin.Forms;
+using ContosoBankApp.Views;
+
+namespace ContosoBankApp.ViewModels
+{
+    public class MainPageViewModel 
+    {
+        public string UserName { get; set; }
+
+        public Command ShowAuthenticationInfo
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await App.Current.MainPage.Navigation.PushAsync(new AuthenticationInfoPage());
+                });
+            }
+        }
+
+        public Command ShowAccountList
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await App.Current.MainPage.Navigation.PushAsync(new AccountListPage());
+                });
+            }
+        }
+
+        //Constructor
+        public MainPageViewModel()
+        {
+            UserName = $"Welcome {App.UserName}";
+
+        }
+    }
+}

@@ -35,26 +35,33 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AccountListPage.xaml.cs">
+    <Compile Include="ViewModels\AccountListViewModel.cs" />
+    <Compile Include="ViewModels\ListPageViewModel.cs" />
+    <Compile Include="Views\AccountListPage.xaml.cs">
       <DependentUpon>AccountListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AuthenticationInfoPage.xaml.cs">
-      <DependentUpon>AuthenticationInfoPage.xaml</DependentUpon>
+    <Compile Include="Views\AccountPage.xaml.cs">
+      <DependentUpon>AccountPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LoginPage.xaml.cs">
+    <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AuthenticationInfoViewModel.cs" />
+    <None Include="ViewModels\MainPageViewModel.cs.old" />
+    <Compile Include="Views\AuthenticationInfoPage.xaml.cs">
+      <DependentUpon>AuthenticationInfoPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MainPage.xaml">
+    <EmbeddedResource Include="Views\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -64,7 +71,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -90,19 +96,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="LoginPage.xaml">
+    <EmbeddedResource Include="Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AuthenticationInfoPage.xaml">
+    <EmbeddedResource Include="Views\AccountListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AccountListPage.xaml">
+    <EmbeddedResource Include="Views\AccountPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\AuthenticationInfoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

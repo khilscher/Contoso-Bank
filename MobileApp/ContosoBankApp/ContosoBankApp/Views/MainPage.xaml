@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ContosoBankApp.Views.MainPage"
+             xmlns:local="clr-namespace:ContosoBankApp;assembly=ContosoBankApp"
+             Title="Contoso Bank">
+
+  <ContentPage.Content>
+    <ListView ItemsSource="{x:Static local:Views.MainPage.items}" RowHeight="50" ItemSelected="OnSelection" IsPullToRefreshEnabled="false" SeparatorVisibility="Default">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <StackLayout Padding="15,0">
+              <Label Text="{Binding .}" FontSize="24"/>
+            </StackLayout>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </ContentPage.Content>
+
+</ContentPage>
+

@@ -1,20 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:ContosoBankApp"
-             x:Class="ContosoBankApp.MainPage"
-             Title="Contoso Bank">
+             x:Class="ContosoBankApp.Views.AuthenticationInfoPage"
+             Title="Your Login Info">
 
   <ContentPage.Content>
     <ScrollView Orientation="Vertical">
       <StackLayout VerticalOptions="Center" HorizontalOptions="Center" >
-
+        <Label Text="{Binding UserId}" />
         <Label Text="{Binding UserName}" />
-        <Button Clicked="ViewAccountListButton_Clicked" Text="View Accounts" />
-        <Button Clicked="ViewLoginButton_Clicked" Text="View Login Info" />
-
+        <Label Text="{Binding TokenType}" />
+        <Label Text="{Binding ExpiresOn}" />
+        <Label Text="IdToken" />
+        <Editor Text="{Binding IdToken}" />
       </StackLayout>
     </ScrollView>
   </ContentPage.Content>
-
 </ContentPage>
