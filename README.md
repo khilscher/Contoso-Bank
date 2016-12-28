@@ -39,11 +39,11 @@ public static string ApiBaseURL = "https://<apiurl>.azurewebsites.net";
 The following are screen shots of the mobile application.
 
 <p align="center">
-  <img src="Images/Login.PNG" width="100"/>
-  <img src="Images/MainPage.PNG" width="100"/>
-  <img src="Images/AccountList.PNG" width="100"/>
-  <img src="Images/Create.PNG" width="100"/>
-  <img src="Images/Profile.PNG" width="100"/>  
+  <img src="Images/Login.PNG" width="300"/>
+  <img src="Images/MainPage.PNG" width="300"/>
+  <img src="Images/AccountList.PNG" width="300"/>
+  <img src="Images/Create.PNG" width="300"/>
+  <img src="Images/Profile.PNG" width="300"/>  
 </p>
 
 ###REST API
