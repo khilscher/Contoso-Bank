@@ -25,22 +25,33 @@ Upon signing in to the mobile application, a bearer token is assigned behind-the
 - A Mac OS X with XCode 8.1 and Xamarin Studio 6.1.2
 - [Microsoft Authentication Library (MSAL)] (https://www.nuget.org/packages/Microsoft.Identity.Client/1.0.304142221-alpha) library (Nuget Package: ```Microsoft.Identity.Client``` (Note, this is a pre-release)
 - Microsoft Azure Active Directory B2C (same tenant use by the API)
+- Update the following in the ```App.xaml.cs``` file:
+
+```
+// TODO: Add your Azure AD B2C tenant information.
+public static string ClientId = "<client ID of application registered in AAD B2C";
+public static string SignUpSignInPolicy = "B2C_1_signin_signup";
+public static string[] Scopes = { ClientId };
+public static string Authority = "https://login.microsoftonline.com/<tenant>.onmicrosoft.com/";
+public static string ApiBaseURL = "https://<apiurl>.azurewebsites.net";
+```
 
 ###REST API
-- The API was written in C# using ASP.NET 4.5.2 WebAPI and ASP.NET MVC for the website hosting the API documentation.
-- Azure App Service - API App
-- [Swagger] (https://www.nuget.org/packages/Swashbuckle/) (Nuget Package: ```Swashbuckle```)
+- The API was written in C# using ASP.NET 4.5.2 WebAPI using the ```ApiController```.
+- The ASP.NET MVC website simply exists for hosting the API documentation, including links to this GibHub repo, and links to the Swagger metadata.
+- [Swagger] is added through the ```Swashbuckle``` NuGet package (https://www.nuget.org/packages/Swashbuckle/)
+- The API is published to Azure App Service as an [API App] (https://azure.microsoft.com/en-us/services/app-service/api/)
 - The API is protected by enabling Easy Auth on the Azure App Service hosting the API and configuring it to use Microsoft Azure Active Directory B2C (same tenant use by the mobile application)
 - Once you've published the API to Azure App Service, you can manually interact with the API using Swagger by browsing to https://someurl.azurewebsites.net/swagger. If you've already enabled Easy Auth, you will need to sign-up (create an account in AAD B2C) and then sign-in to use the API. 
 
 ###AAD B2C
-Follow Chris Gillum's excellent blog post on configuring Azure App Service with Easy Auth and AAD B2C. See reference 1 below. 
+Follow Chris Gillum's excellent blog post on configuring Azure App Service with Easy Auth and [AAD B2C] (https://azure.microsoft.com/en-us/services/active-directory-b2c/). See reference 1 below. 
 
-Easy Auth is an Azure App Service feature which basically places an authentication layer in front of an App Service, such as a Web App or API, with no changes to your application code. For the Contoso Bank API you will see there is no authentication code in the API source code. This is entirely handled by Easy Auth. In reality, you'll likely put some authorization logic into your API code to ensure user's can't see each others data. 
+Easy Auth is an Azure App Service feature which basically places an authentication layer in front of an App Service, such as a Web App or API, with no changes to your application code. For the Contoso Bank API you will see there is no authentication code in the API source code. This is entirely handled by Easy Auth. '''((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;''' was used in the ```AccountsController.cs``` to filter API responses by UserId so User A can't see User B's data, and vice-versa. 
 
 The example code assumes you've setup AAD B2C for "Local" accounts. Meaning, a user can sign-up using a username/pwd or email/pwd (which are stored in AAD B2C) and social network logins are disable. But there is nothing preventing you from enabling and using social network logins.
 
-Easy Auth enabled on the Contoso Bank API is configured to authenticate against AAD B2C (configured for "Local" accounts), the same AAD tenant used by the mobile application. 
+Easy Auth is enabled on the Contoso Bank API and is configured to authenticate against AAD B2C (configured for "Local" accounts), the same AAD tenant used by the mobile application. 
 
 A few important points:
 - Ensure you append ```“/.auth/login/aad/callback``` to the Reply URL when registering your application with AAD B2C.
@@ -49,6 +60,8 @@ A few important points:
 - AAD B2C is NOT like AAD. It uses the new v2 endpoints, requires MSAL (rather than ADAL) etc. So when reading up on AAD B2C, make sure you are not reading the AAD documentation, but rather the AAD B2C documentation. See reference 2.
 
 ##Release Notes
+- A demo instance of the Web API is published at [https://contosobankapi.azurewebsites.net/] (http://contosobankapi.azurewebsites.net/)
+- When logging into the demo site instance for the first time, proceed through the AAD B2C sign-up process to create your user account in the AAD B2C tenant. Once you have created your account, you can view the API documentation at [https://contosobankapi.azurewebsites.net/] (http://contosobankapi.azurewebsites.net/) and the Swagger at [https://contosobankapi.azurewebsites.net/swagger] (http://contosobankapi.azurewebsites.net/swagger)
 - By default AAD B2C returns an [ID token] (https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-reference-tokens) with a 60 minute expiry. This can be increased in AAD B2C. In addition, you can call AcquireTokenSilentAsync when the user navigates to a page or pulls down to refresh a page to refresh the token. MSAL opaquely handles refresh tokens for you. The following code block illustrates this.
 
 ```
@@ -78,9 +91,6 @@ A few important points:
 2. [AAD B2C Documentation] (https://docs.microsoft.com/en-us/azure/active-directory-b2c/)
 3. [Integrate Azure AD B2C into a Xamarin forms app using MSAL] (https://github.com/Azure-Samples/active-directory-b2c-xamarin-native)
 4. [Integrate Microsoft identity and the Microsoft Graph into a Xamarin forms app using MSAL] (https://github.com/Azure-Samples/active-directory-xamarin-native-v2)
-5. [Introduction to MVVM] (https://channel9.msdn.com/Shows/XamarinShow/Introduction-to-MVVM)
-6. [Applying MVVM to Xamarin Forms] (https://channel9.msdn.com/Blogs/MVP-Windows-Dev/Applying-MVVM-to-Xamarin-Forms)
-
-##//TODO
-- Add multi-tenancy to object model so user 1 does not see user 2's bank accounts.
-- Add pages for CRUD operations to mobile application (deposit/withdraw funds, create account, delete account).
+5. [Integrating Azure Active Directory B2C into Xamarin Mobile App] (http://www.hossambarakat.net/2016/07/07/integrating-azure-active-directory-b2c-into-xamarin-mobile-app/)
+6. [Introduction to MVVM] (https://channel9.msdn.com/Shows/XamarinShow/Introduction-to-MVVM)
+7. [Applying MVVM to Xamarin Forms] (https://channel9.msdn.com/Blogs/MVP-Windows-Dev/Applying-MVVM-to-Xamarin-Forms)
