@@ -30,12 +30,15 @@ Upon signing in to the mobile application, a bearer token is assigned behind-the
 
 ```
 // TODO: Add your Azure AD B2C tenant information.
-public static string ClientId = "<client ID of application registered in AAD B2C";
+public static string ClientId = "<client ID of application registered in AAD B2C>";
 public static string SignUpSignInPolicy = "B2C_1_signin_signup";
 public static string[] Scopes = { ClientId };
 public static string Authority = "https://login.microsoftonline.com/<tenant>.onmicrosoft.com/";
 public static string ApiBaseURL = "https://<apiurl>.azurewebsites.net";
 ```
+The following are screen shots of the mobile application.
+![alt tag](https://raw.githubusercontent.com/khilscher/Contoso-Bank/master/Images/Login.png)
+
 
 ###REST API
 - The API was written in C# using ASP.NET 4.5.2 WebAPI using the ```ApiController```.
