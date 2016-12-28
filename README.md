@@ -53,7 +53,7 @@ The following are screen shots of the mobile application.
 - The API is published to Azure App Service as an [API App] (https://azure.microsoft.com/en-us/services/app-service/api/)
 - The API is protected by enabling Easy Auth on the Azure App Service hosting the API and configuring it to use Microsoft Azure Active Directory B2C (same tenant use by the mobile application)
 - Once you've published the API to Azure App Service, you can manually interact with the API using Swagger by browsing to https://someurl.azurewebsites.net/swagger. If you've already enabled Easy Auth, you will need to sign-up (create an account in AAD B2C) and then sign-in to use the API. 
-- A sample of the Contose Bank API has been published at [https://contosobankapi.azurewebsites.net/] (https://contosobankapi.azurewebsites.net/)
+- A sample of the Contose Bank API has been published at [https://contosobankapi.azurewebsites.net/] (https://contosobankapi.azurewebsites.net/). You will need to click the link and sign-up first.
 
 ###AAD B2C
 Follow Chris Gillum's excellent blog post on configuring Azure App Service with Easy Auth and [AAD B2C] (https://azure.microsoft.com/en-us/services/active-directory-b2c/). See reference 1 below. 
