@@ -21,6 +21,7 @@ Upon signing in to the mobile application, a bearer token is assigned behind-the
 ##Solution Components
 ###Mobile Application
 - The mobile application was written in C# using Xamarin.Forms for a single code base supporting iOS, Android, and Windows UWP.
+- Most of the code is using MVVM pattern, to minimize code-behind and make unit testing easier.
 - A Windows 10 computer with Visual Studio 2015, Update 3 and Xamarin installed.
 - A Mac OS X with XCode 8.1 and Xamarin Studio 6.1.2
 - [Microsoft Authentication Library (MSAL)] (https://www.nuget.org/packages/Microsoft.Identity.Client/1.0.304142221-alpha) library (Nuget Package: ```Microsoft.Identity.Client``` (Note, this is a pre-release)
