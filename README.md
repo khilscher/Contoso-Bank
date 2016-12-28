@@ -49,6 +49,8 @@ A few important points:
 - AAD B2C is NOT like AAD. It uses the new v2 endpoints, requires MSAL (rather than ADAL) etc. So when reading up on AAD B2C, make sure you are not reading the AAD documentation, but rather the AAD B2C documentation. See reference 2.
 
 ##Release Notes
+- A demo instance of the Web API is published at [https://contosobankapi.azurewebsites.net/] (http://contosobankapi.azurewebsites.net/)
+- When logging into the demo site instance for the first time, proceed through the AAD B2C sign-up process to create your user account in the AAD B2C tenant. Once you have created your account, you can view the API documentation at [https://contosobankapi.azurewebsites.net/] (http://contosobankapi.azurewebsites.net/) and the Swagger at [https://contosobankapi.azurewebsites.net/swagger] (http://contosobankapi.azurewebsites.net/swagger)
 - By default AAD B2C returns an [ID token] (https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-reference-tokens) with a 60 minute expiry. This can be increased in AAD B2C. In addition, you can call AcquireTokenSilentAsync when the user navigates to a page or pulls down to refresh a page to refresh the token. MSAL opaquely handles refresh tokens for you. The following code block illustrates this.
 
 ```
@@ -81,7 +83,3 @@ A few important points:
 5. [Integrating Azure Active Directory B2C into Xamarin Mobile App] (http://www.hossambarakat.net/2016/07/07/integrating-azure-active-directory-b2c-into-xamarin-mobile-app/)
 6. [Introduction to MVVM] (https://channel9.msdn.com/Shows/XamarinShow/Introduction-to-MVVM)
 7. [Applying MVVM to Xamarin Forms] (https://channel9.msdn.com/Blogs/MVP-Windows-Dev/Applying-MVVM-to-Xamarin-Forms)
-
-##//TODO
-- Add multi-tenancy to object model so user 1 does not see user 2's bank accounts.
-- Add pages for CRUD operations to mobile application (deposit/withdraw funds, create account, delete account).
