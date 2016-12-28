@@ -37,7 +37,11 @@ public static string Authority = "https://login.microsoftonline.com/<tenant>.onm
 public static string ApiBaseURL = "https://<apiurl>.azurewebsites.net";
 ```
 The following are screen shots of the mobile application.
-![alt tag](https://github.com/khilscher/Contoso-Bank/blob/master/Images/AccountList.PNG)
+
+<p align="center">
+  <img src="Images/Login.PNG" width="350"/>
+  <img src="Images/AccountList.PNG" width="350"/>
+</p>
 
 
 ###REST API
