@@ -5,10 +5,16 @@
              Title="Account List">
 
   <ContentPage.Content>
-    <ListView  x:Name="lstView" RowHeight="100" SeparatorVisibility="Default" ItemsSource="{Binding Accounts}">
+    <ListView  x:Name="lstView" RowHeight="100" SeparatorVisibility="Default" 
+               ItemsSource="{Binding Accounts}" IsPullToRefreshEnabled="true" RefreshCommand="{Binding LoadAccountsCommand}" 
+               IsRefreshing="{Binding IsBusy, Mode=OneWay}">
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
+            <ViewCell.ContextActions>
+              <MenuItem Clicked="OnDelete" CommandParameter="{Binding AccountNumber}"
+                 Text="Delete" IsDestructive="True" />
+            </ViewCell.ContextActions>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
               <StackLayout Orientation="Vertical">
                 <Label Text = "{Binding AccountNumber}" FontSize="24" />

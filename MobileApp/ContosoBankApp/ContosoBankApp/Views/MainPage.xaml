@@ -6,11 +6,11 @@
              Title="Contoso Bank">
 
   <ContentPage.Content>
-    <ListView ItemsSource="{x:Static local:Views.MainPage.items}" RowHeight="50" ItemSelected="OnSelection" IsPullToRefreshEnabled="false" SeparatorVisibility="Default">
+    <ListView ItemsSource="{x:Static local:Views.MainPage.items}" RowHeight="50" ItemSelected="OnSelection" IsPullToRefreshEnabled="false" SeparatorVisibility="None">
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
-            <StackLayout Padding="15,0">
+            <StackLayout Padding="15,15,15,15">
               <Label Text="{Binding .}" FontSize="24"/>
             </StackLayout>
           </ViewCell>

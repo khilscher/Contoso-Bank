@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ContosoBankApp.Views.NewAccountPage"
+             Title="New Account">
+
+  <ContentPage.Content>
+    <StackLayout>
+      <Label Text="Account Number" FontSize="20"/>
+      <Entry Text="{Binding AccountNumber}" Placeholder="112233"/>
+      <Label Text="Account Type" FontSize="20"/>
+      <Entry Text="{Binding AccountType}" Placeholder="Savings"/>
+      <Label Text="Initial Balance" FontSize="20"/>
+      <Entry Text="{Binding AccountBalance}" Placeholder="499.99"/>
+      <Button Text="Create" Command="{Binding CreateNewAcctCmd}" BorderWidth="1" BorderColor="Black" FontSize="15"/>
+      <Label Text="{Binding CreateAccountStatus}" />
+    </StackLayout>
+  </ContentPage.Content>
+
+</ContentPage>

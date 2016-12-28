@@ -8,6 +8,7 @@ using Api.Models;
 using Swashbuckle.Swagger.Annotations;
 using System.Web.Http.Description;
 using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace Api.Controllers
 {
@@ -15,22 +16,10 @@ namespace Api.Controllers
     {
 
         static List<Account> accountList = new List<Account>();
-        static bool isInitialized;
 
         public AccountsController()
         {
             //Constructor
-            if (!isInitialized)
-            {
-                Account initalAccount = new Account();
-                initalAccount.AccountNumber = 1001;
-                initalAccount.AccountType = "Savings";
-                initalAccount.AccountBalance = 49999.99;
-
-                accountList.Add(initalAccount);
-
-                isInitialized = true;
-            }
         }
 
         // GET api/accounts
@@ -44,11 +33,19 @@ namespace Api.Controllers
             Type = typeof(List<Account>))]
         public IHttpActionResult Get()
         {
-            return Ok(accountList);
+
+            List<Account> foundAccounts = new List<Account>();
+
+            //Obtain caller's UserId from claim
+            string owner = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            //Find all accounts belonging to user
+            foundAccounts = accountList.FindAll(account => account.UserId == owner);
+
+            return Ok(foundAccounts);
         }
 
         // GET api/accounts/1001
-        // GET api/accounts
         /// <summary>
         /// Gets a specific account by account number.
         /// </summary>
@@ -65,7 +62,11 @@ namespace Api.Controllers
         {
             Account foundAccount = new Account();
 
-            foundAccount = accountList.Find(account => account.AccountNumber == accountNumber);
+            //Obtain caller's UserId from claim
+            string owner = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            //Find specified account belonging to user
+            foundAccount = accountList.Find(account => (account.AccountNumber == accountNumber) && (account.UserId == owner));
 
             if (foundAccount == null)
             {
@@ -77,7 +78,6 @@ namespace Api.Controllers
         }
 
         // POST api/accounts
-        // GET api/accounts
         /// <summary>
         /// Creates a new account.
         /// </summary>
@@ -91,22 +91,32 @@ namespace Api.Controllers
             Type = typeof(ErrorResponse))]
         public IHttpActionResult Post([FromBody]Account accountInfo)
         {
+            //Obtain caller's UserId from claim
+            string owner = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
 
             Account foundAccount = new Account();
-            foundAccount = accountList.Find(account => account.AccountNumber == accountInfo.AccountNumber);
 
+            //Find specified account belonging to user
+            foundAccount = accountList.Find(account => (account.AccountNumber == accountInfo.AccountNumber) && (account.UserId == owner));
+
+            //If no duplicate account already exists, create new account.
             if (foundAccount == null)
             {
+                //Append UserId
+                accountInfo.UserId = owner;
+
+                //Add to static field. This should actually be persisted to a DB.
                 accountList.Add(accountInfo);
+
                 return CreatedAtRoute("DefaultApi", new { id = accountInfo.AccountNumber}, accountInfo);
             }
 
             ErrorResponse error = new ErrorResponse { Message = "Duplicate account already exists" };
+
             return Content(HttpStatusCode.Conflict, error);
         }
 
         // PUT api/accounts/1001
-        // GET api/accounts
         /// <summary>
         /// Updates an existing account.
         /// </summary>
@@ -121,9 +131,15 @@ namespace Api.Controllers
         [Route("api/accounts/{accountNumber}")]
         public IHttpActionResult Put([FromUri] int accountNumber, [FromBody]Account updatedAcctInfo)
         {
+            //Obtain caller's UserId from claim
+            string owner = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
 
             Account acctToUpdate = new Account();
-            acctToUpdate = accountList.Find(account => account.AccountNumber == accountNumber);
+
+            //Find specified account belonging to user
+            acctToUpdate = accountList.Find(account => (account.AccountNumber == accountNumber) && (account.UserId == owner));
+
+            //If account is found, update it.
             if (acctToUpdate != null)
             {
                 acctToUpdate.AccountNumber = updatedAcctInfo.AccountNumber;
@@ -134,13 +150,13 @@ namespace Api.Controllers
             }
 
             ErrorResponse error = new ErrorResponse { Message = "Account not found" };
+
             return Content(HttpStatusCode.NotFound, error);
 
         }
 
 
         // DELETE api/accounts/1001
-        // GET api/accounts
         /// <summary>
         /// Deletes an account.
         /// </summary>
@@ -155,8 +171,15 @@ namespace Api.Controllers
         [Route("api/accounts/{accountNumber}")]
         public IHttpActionResult Delete([FromUri] int accountNumber)
         {
+            //Obtain caller's UserId from claim
+            string owner = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
+
             Account acctToDelete = new Account();
-            acctToDelete = accountList.Find(account => account.AccountNumber == accountNumber);
+
+            //Find specified account belonging to user
+            acctToDelete = accountList.Find(account => (account.AccountNumber == accountNumber) && (account.UserId == owner));
+
+            //If found, delete it
             if (acctToDelete != null)
             {
                 accountList.Remove(acctToDelete);
@@ -164,6 +187,7 @@ namespace Api.Controllers
             }
 
             ErrorResponse error = new ErrorResponse { Message = "Account not found" };
+
             return Content(HttpStatusCode.NotFound, error);
         }
         

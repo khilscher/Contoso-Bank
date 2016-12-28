@@ -30,7 +30,7 @@ namespace ContosoBankApp.iOS
             var result = base.FinishedLaunching(app, options);
 
             var platformParameters = UIApplication.SharedApplication.KeyWindow.RootViewController;
-            App.AuthenticationClient.PlatformParameters = new PlatformParameters(platformParameters);
+            //App.AuthenticationClient.PlatformParameters = new PlatformParameters(platformParameters);
 
             return result;
 

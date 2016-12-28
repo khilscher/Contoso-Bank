@@ -11,6 +11,7 @@ namespace ContosoBankApp.Views
 {
     public partial class LoginPage : ContentPage
     {
+        public IPlatformParameters PlatformParameters { get; set; }
         public LoginPage()
         {
             InitializeComponent();
@@ -18,10 +19,12 @@ namespace ContosoBankApp.Views
 
         protected override async void OnAppearing()
         {
+            btnLogin.IsVisible = false;
 
             // let's see if we have a user in our cache
             try
             {
+                App.AuthenticationClient = new PublicClientApplication(App.ClientId);
                 AuthenticationResult ar = await App.AuthenticationClient.AcquireTokenSilentAsync(App.Scopes,
                      string.Empty,
                      App.Authority,
@@ -40,6 +43,7 @@ namespace ContosoBankApp.Views
             catch
             {
                 // doesn't matter, we go into interactive login mode
+                btnLogin.IsVisible = true;
             }
         }
 
@@ -48,6 +52,9 @@ namespace ContosoBankApp.Views
             try
             {
                 btnLogin.IsEnabled = false;
+                App.AuthenticationClient = new PublicClientApplication(App.ClientId);
+                App.AuthenticationClient.PlatformParameters = PlatformParameters;
+
                 AuthenticationResult ar = await App.AuthenticationClient.AcquireTokenAsync(App.Scopes,
                     "",
                     UiOptions.SelectAccount,

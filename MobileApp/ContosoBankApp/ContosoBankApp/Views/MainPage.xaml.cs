@@ -15,10 +15,11 @@ namespace ContosoBankApp.Views
     {
         public string UserName { get; set; }
         public static ObservableCollection<string> items { get; set; }
+        public IPlatformParameters platformParameters { get; set; }
 
         public MainPage()
         {
-            items = new ObservableCollection<string>() { "View Accounts", "View Login Info", "Logout" };
+            items = new ObservableCollection<string>() { "View Accounts", "Open New Account", "Your Profile", "Logout" };
 
             InitializeComponent();
 
@@ -36,7 +37,10 @@ namespace ContosoBankApp.Views
                 case "View Accounts":
                     App.Current.MainPage.Navigation.PushAsync(new AccountListPage());
                     break;
-                case "View Login Info":
+                case "Open New Account":
+                    App.Current.MainPage.Navigation.PushAsync(new NewAccountPage());
+                    break;
+                case "Your Profile":
                     App.Current.MainPage.Navigation.PushAsync(new AuthenticationInfoPage());
                     break;
                 case "Logout":
@@ -55,6 +59,7 @@ namespace ContosoBankApp.Views
 
             try
             {
+                App.AuthenticationClient = new PublicClientApplication(App.ClientId);
                 AuthenticationResult ar = await App.AuthenticationClient.AcquireTokenSilentAsync(App.Scopes,
                  string.Empty,
                  App.Authority,
@@ -68,6 +73,7 @@ namespace ContosoBankApp.Views
             catch (Exception ee)
             {
                 DisplayAlert("An error has occurred", "Exception message: " + ee.Message, "Dismiss");
+                App.AuthenticationClient = new PublicClientApplication(App.ClientId);
                 App.AuthenticationClient.UserTokenCache.Clear(App.AuthenticationClient.ClientId);
                 Navigation.PushAsync(new LoginPage());
             }
@@ -77,7 +83,11 @@ namespace ContosoBankApp.Views
         {
             try
             {
-                App.AuthenticationClient.UserTokenCache.Clear(App.AuthenticationClient.ClientId);
+
+                foreach (var user in App.AuthenticationClient.Users)
+                {
+                    user.SignOut();
+                }
 
                 //Reset the main page from the MainPage to the LoginPage
                 App.Current.MainPage = new NavigationPage(new LoginPage());

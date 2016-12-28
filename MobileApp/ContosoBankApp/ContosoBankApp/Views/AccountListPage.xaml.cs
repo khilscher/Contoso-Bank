@@ -19,14 +19,19 @@ namespace ContosoBankApp.Views
         {
             InitializeComponent();
 
-            //Using MessageCenter to display messages
-            BindingContextChanged += (object sender, EventArgs e) => {
-                MessagingCenter.Send<Page>(this, "BindingContextChanged.AccountListViewModel");
-            };
-
             //Bind to ViewModel for entire Content Page. Binding is inherited by all children on the page
             BindingContext = new AccountListViewModel();
 
         }
+
+        //TODO Update this to MVVM pattern
+        public void OnDelete(object sender, EventArgs e)
+        {
+            var mi = ((MenuItem)sender);
+            AccountListViewModel.DeleteAccountAsync(mi.CommandParameter.ToString());
+            DisplayAlert("Delete", "Account number " + mi.CommandParameter + " deleted", "OK");
+
+        }
+        
     }
 }
