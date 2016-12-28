@@ -53,15 +53,22 @@ The following are screen shots of the mobile application.
 - The API is published to Azure App Service as an [API App] (https://azure.microsoft.com/en-us/services/app-service/api/)
 - The API is protected by enabling Easy Auth on the Azure App Service hosting the API and configuring it to use Microsoft Azure Active Directory B2C (same tenant use by the mobile application)
 - Once you've published the API to Azure App Service, you can manually interact with the API using Swagger by browsing to https://someurl.azurewebsites.net/swagger. If you've already enabled Easy Auth, you will need to sign-up (create an account in AAD B2C) and then sign-in to use the API. 
+- A sample of the Contose Bank API has been published at [https://contosobankapi.azurewebsites.net/] (https://contosobankapi.azurewebsites.net/)
 
 ###AAD B2C
 Follow Chris Gillum's excellent blog post on configuring Azure App Service with Easy Auth and [AAD B2C] (https://azure.microsoft.com/en-us/services/active-directory-b2c/). See reference 1 below. 
 
-Easy Auth is an Azure App Service feature which basically places an authentication layer in front of an App Service, such as a Web App or API, with no changes to your application code. For the Contoso Bank API you will see there is no authentication code in the API source code. This is entirely handled by Easy Auth. '''((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;''' was used in the ```AccountsController.cs``` to filter API responses by UserId so User A can't see User B's data, and vice-versa. 
+AAD B2C is a highly available, global, identity management service for consumer-facing applications that scales to hundreds of millions of identities. It can be easily integrated across mobile and web platforms. Your consumers can log on to all your applications through fully customizable experiences by using their existing social accounts or by creating new credentials.
+
+Easy Auth is an Azure App Service feature which basically places an authentication layer in front of an App Service, such as a Web App or API, with no changes to your application code. 
+
+Combining AAD B2C and Easy Auth allows you to quickly secure your Mobile backend for consumer-facing apps (apps that allow the consumer to sign-up themselves).
+
+For the Contoso Bank API you will see there is no authentication code in the API source code. This is entirely handled by Easy Auth. Only '''((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;''' was used in the ```AccountsController.cs``` to filter API responses by UserId so User A can't see User B's data, and vice-versa. 
 
 The example code assumes you've setup AAD B2C for "Local" accounts. Meaning, a user can sign-up using a username/pwd or email/pwd (which are stored in AAD B2C) and social network logins are disable. But there is nothing preventing you from enabling and using social network logins.
 
-Easy Auth is enabled on the Contoso Bank API and is configured to authenticate against AAD B2C (configured for "Local" accounts), the same AAD tenant used by the mobile application. 
+Easy Auth is enabled on the Contoso Bank API and is configured to authenticate against the same AAD B2C tenant used by the mobile application. 
 
 A few important points:
 - Ensure you append ```“/.auth/login/aad/callback``` to the Reply URL when registering your application with AAD B2C.
