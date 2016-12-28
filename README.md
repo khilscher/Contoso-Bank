@@ -25,7 +25,7 @@ Upon signing in to the mobile application, a bearer token is assigned behind-the
 - A Mac OS X with XCode 8.1 and Xamarin Studio 6.1.2
 - [Microsoft Authentication Library (MSAL)] (https://www.nuget.org/packages/Microsoft.Identity.Client/1.0.304142221-alpha) library (Nuget Package: ```Microsoft.Identity.Client``` (Note, this is a pre-release)
 - Microsoft Azure Active Directory B2C (same tenant use by the API)
-- Update the following in the App.xaml.cs file:
+- Update the following in the ```App.xaml.cs``` file:
 
 ```
 // TODO: Add your Azure AD B2C tenant information.
