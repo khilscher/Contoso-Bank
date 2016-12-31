@@ -42,7 +42,7 @@ The following are screen shots of the mobile application.
   <img src="Images/Login.PNG" width="300"/>
   <img src="Images/MainPage.PNG" width="300"/>
   <img src="Images/AccountList.PNG" width="300"/>
-  <img src="Images/Delete.PNG" width="300"/>
+  <img src="Images/Delete.png" width="300"/>
   <img src="Images/Create.PNG" width="300"/>
   <img src="Images/Profile.PNG" width="300"/>  
 </p>
